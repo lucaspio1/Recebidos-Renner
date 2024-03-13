@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Item</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <form id="registrationForm" action="/submit_registration" method="post">
+    <label for="descricao">Descrição:</label><br>
+    <input type="text" id="Descrição" name="descricao" required><br>
+
+    <label for="serialNumber">Número de Série:</label><br>
+    <input type="text" id="serialNumber" name="serialNumber" required><br>
+
+    <label for="loja">Loja:</label><br>
+    <input type="text" id="loja" name="loja" required><br>
+
+    <label for="datachegada">Data de Chegada:</label><br>
+    <input type="date" id="datachegada" name="datachegada" required><br>
+
+    <input type="submit" value="Registrar">
+  </form>
+
+
+  <h1>Últimas 5 Informações</h1>
+  <table id="last-data-table">
+      <thead>
+          <tr>
+              <th>Descrição</th>
+              <th>Serial Number</th>
+              <th>Loja</th>
+              <th>Data de Chegada</th>
+          </tr>
+      </thead>
+      <tbody>
+          <!-- Dados da tabela serão adicionados aqui via JavaScript -->
+      </tbody>
+  </table>
+
+  
+  <!-- Botão para ir para a próxima página -->
+  <button id="IrparaRecebidos">Recebidos</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
