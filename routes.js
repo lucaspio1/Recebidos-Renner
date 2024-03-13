@@ -1,10 +1,9 @@
-import express, { Router } from 'express';
+import express from 'express';
 import mongoose from 'mongoose';
-import { join } from 'path';
 
 const router = express.Router();
 
-// Definir o esquema para os dados
+// Defina o esquema para os dados
 const registroChegadaSchema = new mongoose.Schema({
     descricao: String,
     serialNumber: String,
@@ -12,7 +11,7 @@ const registroChegadaSchema = new mongoose.Schema({
     datachegada: Date
 });
 
-// Criar um modelo com base no esquema
+// Crie um modelo com base no esquema
 const RegistroChegada = mongoose.model('RegistroChegada', registroChegadaSchema);
 
 // Rota para lidar com a submissão do formulário
@@ -39,21 +38,15 @@ router.post('/submit_registration', async (req, res) => {
     }
 });
 
-// Rota para buscar dados do banco e enviar para a página HTML
-router.get('/data', async (req, res) => {
+// Rota para buscar os últimos registros do banco de dados
+router.get('/last_registrations', async (req, res) => {
     try {
-        const data = await RegistroChegada.find().sort({ datachegada: -1 }).limit(5);
-        res.json(data);
+        const lastRegistrations = await RegistroChegada.find().sort({ datachegada: -1 }).limit(5);
+        res.json(lastRegistrations);
     } catch (error) {
-        console.error('Erro ao buscar os dados do MongoDB:', error);
+        console.error('Erro ao buscar os últimos registros do MongoDB:', error);
         res.status(500).send('Erro interno do servidor');
     }
-});
-
-// Rota para servir a página HTML que contém a tabela de dados
-router.get('/recebidos', (req, res) => {
-    const dataPath = join(process.cwd(), 'data.html');
-    res.sendFile(dataPath);
 });
 
 export default router;
